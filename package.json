@@ -23,5 +23,8 @@
     "@slidev/theme-default": "^0.25.0",
     "@slidev/theme-seriph": "^0.25.0",
     "better-sqlite3": "^11.5.0"
+  },
+  "engines": {
+    "node": ">20"
   }
 }
