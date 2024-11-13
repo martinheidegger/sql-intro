@@ -146,7 +146,7 @@ $ node example/fs.mjs
 </v-clicks>
 
 ---
-clicks: 5
+clicks: 7
 ---
 
 ## Different kinds of Databases
@@ -155,10 +155,14 @@ clicks: 5
 
 <v-clicks>
 
-<div v-click.hide="5"><mdi-key /> Key/Value　→　<logos-redis /> Redis</div>
-<div v-click.hide="5"><mdi-file-outline /> Document　→　<logos-mongodb /></div>
-<div v-click.hide="5"><mdi-graph-outline /> Graph　→　<logos-neo4j /></div>
-<div><mdi-relation-one-to-one-or-many /> Relational 　→　<carbon-sql /></div>
+<div v-click.hide="7"><mdi-key /> Key/Value　→　<logos-redis /> Redis</div>
+<div v-click.hide="7"><mdi-file-outline /> Document　→　<logos-mongodb /></div>
+<div v-click.hide="7"><mdi-graph-outline /> Graph　→　<logos-neo4j /></div>
+<div v-click.hide="7"><mdi-arrow-projectile /> 
+Vector　→　<logos-chroma /> Chroma</div>
+<div v-click.hide="7"><mdi-clock-out />
+TimeSeries　→　<logos-crateio /> Crate.io</div>
+<div><mdi-relation-one-to-one-or-many /> Relational 　→　<logos-postgresql /> PostgreSQL</div>
 
 </v-clicks>
 
