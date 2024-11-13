@@ -5,4 +5,13 @@
         "readme.md"
     ],
     "slidev.port": 3030,
+    "sqltools.connections": [
+        {
+            "previewLimit": 50,
+            "driver": "SQLite",
+            "name": "Test",
+            "database": "./test.db"
+        }
+    ],
+    "sqltools.useNodeRuntime": true,
 }

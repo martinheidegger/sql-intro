@@ -1,5 +1,9 @@
 {
   "recommendations": [
-    "antfu.slidev"
+    "antfu.slidev",
+    "alexcvzz.vscode-sqlite",
+    "inferrinizzard.prettier-sql-vscode",
+    "qwtel.sqlite-viewer",
+    "mtxr.sqltools-driver-sqlite"
   ]
 }

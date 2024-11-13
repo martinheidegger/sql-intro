@@ -26,7 +26,7 @@ Osaka, 2024/11/16
 
 <div class="notes" v-click>
 
-SQL is a topic that I have learned 20 years ago. I had this very thick PHP book that I was determined to read every page of, and quite a bit of it was about how to use mysql databases with PHP. Of course at the time SQL was used. SQL is 40 years old now and over the years many have tried to replace it. But still, when I started my current work 1½ years ago, SQL was on the menu. Even though I haven’t touched it a hot bit, I had to get again into SQL. Over this year I re-learned a lot of SQL concepts and got familiar with new concepts. We accumulated quite a bit of data. Now we have several tables that are in the 10Gb+ field - a first for me and we are running into SQL performance issues every other 
+SQL is a topic that I have learned 20 years ago. I had this very thick PHP book that I was determined to read every page of, and quite a bit of it was about how to use mysql databases with PHP. Of course at the time SQL was used. SQL is 40 years old now and over the years many have tried to replace it. But still, when I started my current work 1½ years ago, SQL was on the menu. Even though I haven’t touched it a hot bit, I had to get again into SQL. Over this year I re-learned a lot of SQL concepts and got familiar with new concepts. We accumulated quite a bit of data. Now we have several tables that are in the 10Gb+ area - a first for me and we are running into SQL performance issues every other 
 week. I have to deal with SQL a fair amount these days and so I thought its a good time to dive into it together.
 
 </div>
@@ -235,7 +235,7 @@ title: Tool choice
 flowchart TD
   subgraph Tools
   phpmyadmin@{ img: "/images/logo-phpmyadmin.png" }
-  beekeeper@{ img: "/images/logo-beekeeper-studio.png", label: "BeeKeeper Studio" }
+  beekeeper@{ img: "/images/logo-beekeeper-studio.png", label: "BeeKeeper Studio", w: 100, h: 100, constraint: "on" }
   dbeaver@{ img: "/images/logo-dbeaver.png" }
   end
 
@@ -246,6 +246,7 @@ flowchart TD
   dbeaver-->DB
 ```
 </div>
+
 
 ---
 
@@ -317,11 +318,142 @@ h3 {
 - Lightweight
 - Good for testing
 
+→ ["Why you should probably be using SQLite"](https://www.epicweb.dev/why-you-should-probably-be-using-sqlite)
+
+---
+
+## 2. We need a client
+
+
+→ [SQL Tools VSCode extension](https://marketplace.visualstudio.com/items?itemName=mtxr.sqltools)
+
+---
+
+## 3. We start!
+
+---
+title: "Example: Very simple create"
+---
+
+`./examples/sql/01_table.sql`
+
+```sql
+CREATE TABLE very_simple_table (id int);
+```
+```sql
+INSERT INTO very_simple_table (id) VALUES (1);
+```
+
+<style>
+pre {
+  --prism-font-size: 2em;
+}
+</style>
+
+* Remember: SQL is pre-structured.
+---
+title: Flexible Syntax
+---
+
+```sql
+CrEaTE    TablE very_simple_table (id int);
+INSerT 
+
+Into 
+very_simple_table(id) vAlUes
+(1);
+```
+
+<style>
+pre {
+  --prism-font-size: 2em;
+}
+</style>
+
+---
+title: Quick refresher
+layout: full
+---
+
+```sql
+-- comment
+```
+```sql
+DROP TABLE :table_name
+```
+```sql
+CREATE TABLE :table_name (:columns)
+```
+```sql
+INSERT INTO :table_name (:column_a, ... :column_n)
+  VALUES (:value_a, ... :value_n), ...  (:value_na, ... :value_nn)
+```
+```sql
+SELECT (:column_a, :column_n) FROM :table_name
+  WHERE :column IS :condition AND :column_n IS  :condition_2
+  LIMIT :how_many_max_rows OFFSET :start_from
+  ORDER BY :column_n ASC
+```
+```sql
+UPDATE :table_name SET :column_1 = :value_1,:column_n = :value_n
+WHERE :condition
+```
+```sql
+DELETE FROM :table_name WHERE :condition
+```
+
+<style>
+pre {
+  --prism-font-size: 1.55em;
+}
+.my-auto {
+  width: 100%!important;
+}
+</style>
+
+---
+
+`02_complex_table_maybe.sql`
+```sql
+CREATE table members (
+  id INTEGER NOT NULL PRIMARY KEY AUTO_INCREMENT,
+  created_at DATE(6),
+  updated_at DATE(6),
+  `name` VARCHAR(255),
+  `rank` INT CHECK (rank >= 0 AND rank <= 10),
+  INDEX rank_index (rank)
+);
+```
+
+<style>
+pre {
+  --prism-font-size: 2em;
+}
+</style>
+
+---
+
+`03_complex_table.sql`
+```sql
+CREATE table members (
+  id INTEGER NOT NULL PRIMARY KEY AUTOINCREMENT,
+  created_at DATE(6),
+  updated_at DATE(6),
+  `name` VARCHAR(255),
+  `rank` INT CHECK (rank >= 0 AND rank <= 10)
+);
+CREATE INDEX rank_index ON members(rank);
+```
+
+<style>
+pre {
+  --prism-font-size: 2em;
+}
+</style>
+
 ---
 
 ## 2. We need a driver <mdi-car-child-seat />
 
 - [Node.JS](https://nodejs.org/en)
 - [better-sqlite3](https://www.npmjs.com/package/better-sqlite3)
-
-## 3. We need to
