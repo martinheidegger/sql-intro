@@ -34,12 +34,11 @@ week. I have to deal with SQL a fair amount these days and so I thought its a go
 
 ## About me
 
-- Martin Heidegger, Austrian in Japan for 15 years
-- I am a programmer for 20 years
-- I like to learn more about coding
-- Long time JavaScript engineer
-- Freelancer for SaaS business
-- These days I do a lot of PHP and Python and SQL.
+- Freelance SaaS programmer
+- 20 years of Web
+- Largely self & experience thought
+- Mostly Frontend
+- Now on an SQL adventure
 
 ---
 layout: intro
@@ -122,7 +121,6 @@ $ node example/fs.mjs
 ## Basic Database features
 
 
-
 <v-clicks>
 
 - <mdi-bomb /> Crash Handling
@@ -134,8 +132,6 @@ $ node example/fs.mjs
 ---
 
 ## Database speed-up
-
-
 
 <v-clicks>
 
@@ -150,8 +146,6 @@ clicks: 7
 ---
 
 ## Different kinds of Databases
-
-
 
 <v-clicks>
 
@@ -238,9 +232,9 @@ title: Tool choice
 ```mermaid
 flowchart TD
   subgraph Tools
-  phpmyadmin@{ img: "/images/logo-phpmyadmin.png" }
-  beekeeper@{ img: "/images/logo-beekeeper-studio.png", label: "BeeKeeper Studio", w: 100, h: 100, constraint: "on" }
-  dbeaver@{ img: "/images/logo-dbeaver.png" }
+  phpmyadmin@{ img: "./images/logo-phpmyadmin.png" }
+  beekeeper@{ img: "./images/logo-beekeeper-studio.png", label: "BeeKeeper Studio", w: 100, h: 100, constraint: "on" }
+  dbeaver@{ img: "./images/logo-dbeaver.png" }
   end
 
   DB@{ icon: "mdi:database", form: "square", label: "Relational DB" }
@@ -328,7 +322,7 @@ h3 {
 
 ## 2. We need a client
 
-
+→ [USQL](https://github.com/xo/usql) → `brew install xo/xo/usql`
 → [SQL Tools VSCode extension](https://marketplace.visualstudio.com/items?itemName=mtxr.sqltools)
 
 ---
@@ -341,12 +335,19 @@ title: "Example: Very simple create"
 
 `./examples/sql/01_table.sql`
 
+<v-clicks>
+
 ```sql
+-- Create a table because SQL assumes a structure
 CREATE TABLE very_simple_table (id int);
 ```
+
 ```sql
+-- Insert something
 INSERT INTO very_simple_table (id) VALUES (1);
 ```
+
+</v-clicks>
 
 <style>
 pre {
@@ -354,7 +355,6 @@ pre {
 }
 </style>
 
-* Remember: SQL is pre-structured.
 ---
 title: Flexible Syntax
 ---
@@ -454,6 +454,87 @@ pre {
   --prism-font-size: 2em;
 }
 </style>
+
+---
+layout: section
+---
+
+# New Concepts
+
+
+<div class="notes" v-click>
+
+Now, all of the next concepts could be probably be their own talk, but I would rather like to quickly wow you.
+and hope that in a future presentation you maybe could pick up the topic.
+
+</div>
+
+---
+
+## Database Proxies
+
+<v-clicks>
+
+- Overcome the limit of parallel connections
+- Swap out the database while running
+- Security Hardening
+- CDN for databases
+
+</v-clicks>
+
+---
+
+## Migrations 
+
+<v-clicks>
+
+- Learn about Migrations
+- Version Fields → Lazy Migrations
+- Background long time migration tasks
+
+</v-clicks>
+
+---
+
+## JSON → Generated Column
+
+- Many databases support a `json` column type.
+- 
+    ```json
+    {
+      "event": "click",
+      "target": "container"
+    }
+    ```
+-
+    ```sql
+    SELECT json_field->>'$.event' as event FROM table
+    ```
+-  It is possible to persist 👆
+
+---
+
+### Severless DB Clusters
+
+- New Database type in AWS RDS
+- Automagically scales out
+- 
+
+---
+
+## High precision unique timestamps
+
+- `Timestamp()
+
+---
+
+## My new concepts
+
+- Database Proxies
+- Migration, Slow Migration, Lazy Migration
+- Generated Columns based from JSON
+- Serverless DB Clusters
+- High precision unique timestamps
 
 ---
 
