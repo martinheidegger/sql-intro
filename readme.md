@@ -48,12 +48,9 @@ layout: intro
 
 <Toc maxDepth=1 />
 
-- Overview: SQL topics
-- Tricky SQL
-
 <div class="notes" v-click>
 
-In today’s presentation, I want to refresh our basic understanding of SQL. What is it? Why use it? How use it? If you have never touched SQL before, you should be able to know how to get started. Also I would like to share a few SQL general topics and terms and why they are important. Some of the topics I didn’t know or understand before. And at the end of the presentation I will go into a few, tricky SQL questions that have crossed my mind and should give some nice game-teasers for all of us in future.
+In today’s presentation, I want to refresh our basic understanding of SQL. What is it? Why use it? How use it? If you have never touched SQL before, you should be able to know how to get started. Also I would like to share a few SQL general topics and terms and why they are important. Some of the topics I didn’t know or understand before. And at the end of the presentation I will go into a few advanced SQL topics that have crossed my mind and should give some nice teasers for all of us in future.
 
 </div>
 
@@ -196,7 +193,6 @@ title: SQL Servers - summary
 
 ##  <mdi-relation-one-to-one-or-many /> Relational Databases
 
-
 - Many Choices available.
 - Somewhat compatible.
 
@@ -232,16 +228,16 @@ title: Tool choice
 ```mermaid
 flowchart TD
   subgraph Tools
-  phpmyadmin@{ img: "./images/logo-phpmyadmin.png" }
-  beekeeper@{ img: "./images/logo-beekeeper-studio.png", label: "BeeKeeper Studio", w: 100, h: 100, constraint: "on" }
-  dbeaver@{ img: "./images/logo-dbeaver.png" }
+  phpmyadmin["phpMyAdmin<br /><em>(server)</em>"]
+  beekeeper["beekeeper<br /><em>(desktop)</em>"]
+  usql["usql<br /><em>(cli)</em>"]
   end
 
   DB@{ icon: "mdi:database", form: "square", label: "Relational DB" }
 
   phpmyadmin-->DB
   beekeeper-->DB
-  dbeaver-->DB
+  usql-->DB
 ```
 </div>
 
@@ -322,8 +318,21 @@ h3 {
 
 ## 2. We need a client
 
-→ [USQL](https://github.com/xo/usql) → `brew install xo/xo/usql`
-→ [SQL Tools VSCode extension](https://marketplace.visualstudio.com/items?itemName=mtxr.sqltools)
+<v-clicks>
+
+- <mdi-code-greater-than /> [USQL](https://github.com/xo/usql) ... `brew install xo/xo/usql` <br/>
+- <mdi-application-braces /> [SQL Tools VSCode extension](https://marketplace.visualstudio.com/items?itemName=mtxr.sqltools) <br/>
+- <mdi-cursor-default-click /><img src="./images/logo-beekeeper-studio.png" style="width:30px;display:inline;" /> [Beekeeper studio](https://www.beekeeperstudio.io/)
+
+</v-clicks>
+
+
+<style>
+.slidev-layout {
+  font-size: 1.8rem;
+  line-height: 3rem;
+}
+</style>
 
 ---
 
@@ -457,14 +466,93 @@ pre {
 
 ---
 layout: section
+hideInToc: false
 ---
 
-# New Concepts
+# Basic SQL concepts
 
+---
+layout: center
+---
+
+### Keys
+
+<v-clicks>
+
+- Rows are not sorted
+- Key is a unique field
+- _"Primary key"_ is extra-optimized
+- Usually  `id` but `<type>_id` is <twemoji-fire />
+
+</v-clicks>
+
+<style>
+.slidev-layout {
+  font-size: 1.8rem;
+}
+</style>
+---
+
+## Key Types
+
+<v-clicks>
+
+- `autoincrement` - 1,2,3,... _(not recommended_ <twemoji-person-shrugging /> _)_
+- _"Compound key"_ - Multiple fields: `author` + `article`
+- `UUID` - `b0cf8f59-d542-40e4-bb9c-6a8085a9792f` (v4)
+- `ULID` - `01AN4Z07BY79KA1307SR9X4MV3`<br/>
+
+    <div v-click="6">
+
+    ```
+      01AN4Z07BY79KA1307SR9X4MV3
+      |----------||------------|
+        Timestamp   Randomness
+          48bits       80bits
+    ```
+
+    </div>
+</v-clicks>
+
+---
+
+## Transactions
+
+- Run multiple statements. 
+- If error occurs → Revert all.
+- <twemoji-turtle /> Slow~ish.
+
+<style>
+.slidev-layout {
+  font-size: 1.8rem;
+}
+</style>
+
+---
+
+## Locks
+
+- You can lock parts of the database for parallel edits!
+- Locking is **slow**!
+
+---
+
+## Update and Create
+
+- 
+
+
+---
+layout: section
+hideInToc: false
+---
+
+# Advanced Concepts
 
 <div class="notes" v-click>
 
-Now, all of the next concepts could be probably be their own talk, but I would rather like to quickly wow you.
+Now, all of the following concepts could be probably be their own talk.
+But, I rather want to wow you quickly.
 and hope that in a future presentation you maybe could pick up the topic.
 
 </div>
@@ -514,17 +602,23 @@ and hope that in a future presentation you maybe could pick up the topic.
 
 ---
 
-### Severless DB Clusters
+### Serverless DB Clusters
 
 - New Database type in AWS RDS
 - Automagically scales out
-- 
 
 ---
 
 ## High precision unique timestamps
 
-- `Timestamp()
+- `Timestamp(6)` for microsecond precision timestamps.
+- 
+    ```sql
+    INSERT INTO simple_table (created_at) VALUES (CURRENT_TIMESTAMP());
+    ```
+- Temp table with unique constraint on timestamp
+- Add timestamp to the table with constraint
+- All data can now be uniquely sorted
 
 ---
 
@@ -537,8 +631,3 @@ and hope that in a future presentation you maybe could pick up the topic.
 - High precision unique timestamps
 
 ---
-
-## 2. We need a driver <mdi-car-child-seat />
-
-- [Node.JS](https://nodejs.org/en)
-- [better-sqlite3](https://www.npmjs.com/package/better-sqlite3)
