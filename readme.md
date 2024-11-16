@@ -518,9 +518,13 @@ layout: center
 
 ## Transactions
 
+<v-clicks>
+
 - Run multiple statements. 
 - If error occurs → Revert all.
 - <twemoji-turtle /> Slow~ish.
+
+</v-clicks>
 
 <style>
 .slidev-layout {
@@ -532,15 +536,95 @@ layout: center
 
 ## Locks
 
-- You can lock parts of the database for parallel edits!
-- Locking is **slow**!
+<v-clicks>
+
+- Lock rows _or_ fields _or_ ranges!
+- <twemoji-snail /> Locking is **slow**!
+
+</v-clicks>
+
+
+<style>
+.slidev-layout {
+  font-size: 1.8rem;
+}
+</style>
 
 ---
 
-## Update and Create
+## Update or Create
 
-- 
+1.
+    ```sql
+    UPDATE ... WHERE id=1
+    ```
+2. `if (error) {` ↓
+    ```sql
+    CREATE (id=1)
+    ```
 
+<style>
+.slidev-layout {
+  font-size: 1.5em;
+}
+code {
+  font-size: 1.5em;
+}
+pre {
+  --prism-font-size: 1em;
+}
+</style>
+---
+
+## Create or Update
+
+1.
+    ```sql
+    CREATE (id=1)
+    ```
+2. `if (error) {` ↓
+    ```sql
+    UPDATE ... WHERE id=1
+    ```
+
+<style>
+.slidev-layout {
+  font-size: 1.5em;
+}
+code {
+  font-size: 1.5em;
+}
+pre {
+  --prism-font-size: 1em;
+}
+</style>
+
+---
+
+## 
+
+1.
+    ```sql
+    CREATE (id=1)
+    ```
+2. `if (error) {` ↓
+    ```sql
+    UPDATE ... WHERE id=1
+    ```
+
+<style>
+.slidev-layout {
+  font-size: 1.5em;
+}
+code {
+  font-size: 1.5em;
+}
+pre {
+  --prism-font-size: 1em;
+}
+</style>
+
+---
 
 ---
 layout: section
@@ -602,10 +686,23 @@ and hope that in a future presentation you maybe could pick up the topic.
 
 ---
 
-### Serverless DB Clusters
+### Database Normalization
 
-- New Database type in AWS RDS
-- Automagically scales out
+<v-clicks>
+
+- <mdi-currency-usd-circle-outline /> That is a job!
+- <mdi-check-underline/> Are all values correct?
+- <mdi-check-underline/> Are all foreign keys correct?
+- <mdi-check-underline/> Does all data make sense?
+
+</v-clicks>
+
+
+<style>
+.slidev-layout {
+  font-size: 1.7rem;
+}
+</style>
 
 ---
 
@@ -631,3 +728,15 @@ and hope that in a future presentation you maybe could pick up the topic.
 - High precision unique timestamps
 
 ---
+
+# Summary
+
+SQL is...
+
+- <mdi-brain /> easy but complex language
+- <mdi-connection /> works everywhere
+- <mdi-text-box-check-outline /> gives us many options
+- <>
+- SQL tools can do a lot of things
+- SQL is maybe a good abstraction layer
+
