@@ -736,7 +736,7 @@ SQL is...
 - <mdi-brain /> easy but complex language
 - <mdi-connection /> works everywhere
 - <mdi-text-box-check-outline /> gives us many options
-- <>
-- SQL tools can do a lot of things
-- SQL is maybe a good abstraction layer
+- ... can do a lot of things
+- ... is good abstraction layer
+- ... can make you money
 
